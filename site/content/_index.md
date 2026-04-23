@@ -37,3 +37,8 @@ hello, 1991
 ```
 
 Use single quotes only. Double-quoted strings do not exist in this version.
+
+## Repositories
+
+- [tamnd/python-0.9.1](https://github.com/tamnd/python-0.9.1) — this fork, patched to compile on modern macOS and Linux
+- [smontanaro/python-0.9.1](https://github.com/smontanaro/python-0.9.1) — the original archive by Skip Montanaro that made this possible
