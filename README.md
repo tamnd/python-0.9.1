@@ -96,6 +96,10 @@ There is also a Unix man page at [`python.man`](python.man).
 
 Guido's original note is preserved at [`README.old`](README.old).
 
+## Thanks
+
+Big thanks to Skip Montanaro for preserving and archiving the original source at [smontanaro/python-0.9.1](https://github.com/smontanaro/python-0.9.1). Without that work this repo would not exist.
+
 ## License
 
 CWI 1991 open source license. See [`LICENSE`](LICENSE).
