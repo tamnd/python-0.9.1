@@ -1,0 +1,17 @@
+title: Python 0.9.1
+description: Python 0.9.1 from 1991. Guido van Rossum's first public release, patched to compile on modern systems.
+baseurl: "/python-0.9.1"
+url: "https://tamnd.github.io"
+
+remote_theme: just-the-docs/just-the-docs@v0.10.1
+
+color_scheme: dark
+
+aux_links:
+  "GitHub":
+    - "https://github.com/tamnd/python-0.9.1"
+
+footer_content: "Python 0.9.1 &copy; 1991 Stichting Mathematisch Centrum, Amsterdam. Documentation converted from the original LaTeX source."
+
+plugins:
+  - jekyll-remote-theme
