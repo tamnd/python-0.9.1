@@ -1,0 +1,10 @@
+baseURL = "https://tamnd.github.io/python-0.9.1/"
+languageCode = "en-us"
+title = "Python 0.9.1"
+theme = "book"
+
+[params]
+  BookRepo = "https://github.com/tamnd/python-0.9.1"
+  BookEditPath = "edit/main/site/content"
+  BookSearch = true
+  BookToC = true
