@@ -41,6 +41,15 @@
 # you may have to toss out the tokenizer.o object.)
 
 
+# Modern Build Settings
+# =====================
+# Suppress warnings from 1991 K&R C on clang/gcc >= 10.
+# SIGTYPE=void matches what modern signal() expects.
+
+CC=	cc
+CFLAGS=	-std=gnu89 -w -Wno-incompatible-function-pointer-types -DSIGTYPE=void
+
+
 # Operating System Defines (ALWAYS READ THIS)
 # ===========================================
 
@@ -70,7 +79,7 @@ RANLIB =	ranlib	# For BSD
 # the interpreter from the source/build directory as distributed will
 # find the library (admittedly a hack).
 
-DEFPYTHONPATH= .:/usr/local/lib/python:/ufs/guido/lib/python:../lib
+DEFPYTHONPATH= .:/usr/local/lib/python:../lib
 
 
 # For "Pure" BSD Systems
