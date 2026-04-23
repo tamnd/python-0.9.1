@@ -5,6 +5,25 @@
 
 Guido uploaded this to alt.sources on February 20, 1991. It predates classes (those came in 0.9.4), has no `list.append`, and only understands single-quoted strings. It is a fully working Python interpreter you can build and run today.
 
+Here is how Guido described it at the time:
+
+> This is Python, an extensible interpreted programming language that
+> combines remarkable power with very clear syntax.
+>
+> Python can be used instead of shell, Awk or Perl scripts, to write
+> prototypes of real applications, or as an extension language of large
+> systems, you name it. There are built-in modules that interface to
+> the operating system and to various window systems: X11, the Mac
+> window system (you need STDWIN for these two), and Silicon Graphics'
+> GL library. It runs on most modern versions of UNIX, on the Mac, and
+> I wouldn't be surprised if it ran on MS-DOS unchanged.
+>
+> Building and installing Python is easy (but do read the Makefile).
+> A UNIX style manual page and extensive documentation (in LaTeX format)
+> are provided.
+>
+> — Guido van Rossum, CWI Amsterdam, 1991
+
 ## Build
 
 ### macOS
@@ -20,12 +39,11 @@ Requires Xcode Command Line Tools (`xcode-select --install`). Tested on macOS 15
 ### Linux (Docker / Podman)
 
 ```sh
-# podman works too, just swap the command
 docker build -t python091 .
 docker run --rm -it python091
 ```
 
-Tested on Debian bookworm inside Podman on macOS.
+Tested on Debian bookworm inside Podman on macOS. Swap `docker` for `podman` if that is what you have.
 
 ## Run
 
@@ -54,7 +72,7 @@ The interpreter itself is solid. The demo scripts are a mixed bag:
 | `demo/stdwin/wdiff.py` | Broken | Requires STDWIN (1991 window toolkit) |
 | `demo/sgi/*` | Broken | SGI IRIX hardware only |
 
-The overflow bug: `intobject.c` checks for multiplication overflow using `(long)0x80000000`, which on a 64-bit system is +2147483648 instead of -2147483648. Every multiplication involving large constants triggers a false overflow. It's a known 32-bit assumption, not a fix we applied.
+The overflow bug: `intobject.c` checks for multiplication overflow using `(long)0x80000000`, which on a 64-bit system is +2147483648 instead of -2147483648. Every multiplication involving large constants triggers a false overflow. It is a known 32-bit assumption and not something we fixed.
 
 See [`demo/README.md`](demo/README.md) for full notes.
 
@@ -62,9 +80,9 @@ See [`demo/README.md`](demo/README.md) for full notes.
 
 Three minimal patches to compile on modern toolchains:
 
-1. **`src/Makefile`** -- added `-std=gnu89 -w -Wno-incompatible-function-pointer-types -DSIGTYPE=void` to CFLAGS and dropped a hardcoded SGI path from DEFPYTHONPATH
-2. **`src/ceval.h`** -- added missing `flushline()` declaration (called in `bltinmodule.c`, never declared)
-3. **`src/bltinmodule.c`** -- added `#include "fgetsintr.h"` (called `fgets_intr()` without the header)
+1. **`src/Makefile`** added `-std=gnu89 -w -Wno-incompatible-function-pointer-types -DSIGTYPE=void` to CFLAGS and dropped a hardcoded SGI path from DEFPYTHONPATH
+2. **`src/ceval.h`** added a missing `flushline()` declaration (called in `bltinmodule.c` but never declared)
+3. **`src/bltinmodule.c`** added `#include "fgetsintr.h"` (called `fgets_intr()` without the header)
 
 Nothing in the language, bytecode, or standard library was touched. See [`Dockerfile`](Dockerfile) for the Linux build recipe.
 
